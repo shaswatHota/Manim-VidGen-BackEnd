@@ -10,7 +10,7 @@ wheels/
 .venv
 
 # folders
-media/videos/video
+media/
 
 
 .env

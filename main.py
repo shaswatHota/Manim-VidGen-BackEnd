@@ -32,7 +32,7 @@ gemini_model = genai.GenerativeModel(model_name="gemini-2.0-flash")
 def call_llm(prompt: str) -> str:
     try:
         generation_config = GenerationConfig(
-            temperature=0.2,
+            temperature=0,
         )
 
         response = gemini_model.generate_content(
