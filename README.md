@@ -132,7 +132,7 @@ choco install ffmpeg
 3. **Access API Keys**: Click "Get API key" in Google AI Studio
 
 4. **Create New Project**: 
-   - You can either create a new Google Cloud project or use an existing one
+   - You can either create a new Google Cloud project or a firebase project or use an existing one
    - Choose "Create API key in new project" for simplicity
 
 5. **Generate API Key**: 
