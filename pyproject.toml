@@ -6,4 +6,10 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "manim>=0.19.0",
+    "fastapi",
+    "uvicorn[standard]",
+    "google-generativeai",
+    "google-api-python-client",
+    "groq",
+    "python-dotenv"
 ]
