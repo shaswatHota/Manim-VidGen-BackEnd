@@ -6,9 +6,10 @@ import subprocess
 # from groq import Groq
 import re
 from fastapi.middleware.cors import CORSMiddleware
-import google.generativeai as genai
-from google.generativeai.types import GenerationConfig
-
+# import google.generativeai as genai
+# from google.generativeai.types import GenerationConfig
+from langchain.chat_models import init_chat_model
+from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 
 
 app = FastAPI()
@@ -24,35 +25,58 @@ config = dotenv_values(".env")
 GEMINI_API_KEY = config.get("GEMINI_API_KEY")
 if not GEMINI_API_KEY:
     raise ValueError("GEMINI_API_KEY not found in .env file.")
-genai.configure(api_key=GEMINI_API_KEY)
+os.environ["GEMINI_API_KEY"] = GEMINI_API_KEY
 
 
-gemini_model = genai.GenerativeModel(model_name="gemini-2.0-flash")
+gemini_model = init_chat_model(
+    model="google_genai:gemini-2.5-flash",
+    temperature = 0,
+    
+)
 
 def call_llm(prompt: str) -> str:
     try:
-        generation_config = GenerationConfig(
-            temperature=0,
-        )
+        # generation_config = GenerationConfig(
+        #     temperature=0,
+        # )
 
-        response = gemini_model.generate_content(
-            contents=[
-                {"role": "user", "parts": [{"text": "You're a Python tutor that generates only Manim animation code as text with proper indentation dont wrap the code inside this ```python ``` "}]},
-                {"role": "user", "parts": [{"text": prompt}]}
-            ],
-           generation_config=generation_config
-        )
+        # response = gemini_model.generate_content(
+        #     contents=[
+        #         {"role": "user", "parts": [{"text": "You're a Python tutor that generates only Manim animation code as text with proper indentation dont wrap the code inside this ```python ``` "}]},
+        #         {"role": "user", "parts": [{"text": prompt}]}
+        #     ],
+        #    generation_config=generation_config
+        # )
         
-        generated_text = response.text
-        
-        
-        match = re.search(r"```(?:python)?\n(.*?)```", generated_text, re.DOTALL)
-        if match:
-            generated_text = match.group(1).strip()
-        else:
-            generated_text = ""
+        messages = [
+            SystemMessage(content="...rules..."),
 
-        return generated_text
+            HumanMessage(content="Create a simple circle animation"),
+            AIMessage(content="""
+                from manim import *
+
+                class CircleScene(Scene):
+                    def construct(self):
+                        c = Circle()
+                        self.play(Create(c))
+                """),
+
+            HumanMessage(content=prompt)
+        ]
+        response=gemini_model.invoke(messages)
+        text= response.content
+        
+        match = re.search(r"```(?:python)?\n(.*?)```", text, re.DOTALL)
+        return match.group(1).strip() if match else text.strip()
+        
+        
+        # match = re.search(r"```(?:python)?\n(.*?)```", generated_text, re.DOTALL)
+        # if match:
+        #     generated_text = match.group(1).strip()
+        # else:
+        #     generated_text = ""
+
+        # return generated_text
     except Exception as e:
         print(f"Error calling LLM: {e}")
         return f"error: {str(e)}"
@@ -73,6 +97,8 @@ async def generate(request: Request):
             return {"status": "error", "message": llm_output}
        
         scene_match = re.search(r"class\s+(\w+)\s*\(", llm_output)
+        if not scene_match:
+            return {"status": "error", "message": "No valid Manim Scene class found"}
         scene_name = scene_match.group(1) if scene_match else "Generated_Scene"
         
         print(scene_name)
@@ -88,9 +114,9 @@ async def generate(request: Request):
         )
 
         if result.returncode != 0:
-            return {"status": "error", "details": result.stderr}
+            return { "status": "error", "details": result.stderr}
 
-        return {"status": "success","scene_name": scene_name, "details": result.stdout}
+        return {"status": "success","scene_name": scene_name, "details": result.stderr, "stdout": result.stdout}
 
     except Exception as e:
         return {"status": "failed", "error": str(e)}

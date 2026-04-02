@@ -11,5 +11,6 @@ dependencies = [
     "google-generativeai",
     "google-api-python-client",
     "groq",
-    "python-dotenv"
+    "python-dotenv",
+    "langchain[google-genai]>=1.2.13",
 ]
