@@ -49,7 +49,12 @@ def call_llm(prompt: str) -> str:
         # )
         
         messages = [
-            SystemMessage(content="...rules..."),
+           SystemMessage(content="""
+                                    You are a Python tutor that ONLY outputs valid Manim code.
+                                    Do not include explanations, comments, or markdown.
+                                    Do not wrap the output in ``` blocks.
+                                    Return only executable Python code.
+                                    """),
 
             HumanMessage(content="Create a simple circle animation"),
             AIMessage(content="""
