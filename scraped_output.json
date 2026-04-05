@@ -1,0 +1,2202 @@
+{
+  "url": "https://docs.manim.community/en/stable/tutorials/quickstart.html",
+  "title": "Quickstart - Manim Community v0.20.1",
+  "meta_description": "Overview: This quickstart guide will lead you through creating a sample project using Manim: an animation engine for precise programmatic animations. First, you will use a command line interface to...",
+  "headings": [
+    {
+      "level": 1,
+      "text": "Quickstart¶"
+    },
+    {
+      "level": 2,
+      "text": "Overview¶"
+    },
+    {
+      "level": 2,
+      "text": "Starting a new project¶"
+    },
+    {
+      "level": 2,
+      "text": "Animating a circle¶"
+    },
+    {
+      "level": 2,
+      "text": "Transforming a square into a circle¶"
+    },
+    {
+      "level": 2,
+      "text": "PositioningMobjects¶"
+    },
+    {
+      "level": 2,
+      "text": "Using.animatesyntax to animate methods¶"
+    },
+    {
+      "level": 2,
+      "text": "TransformvsReplacementTransform¶"
+    },
+    {
+      "level": 3,
+      "text": "Explanation¶"
+    },
+    {
+      "level": 3,
+      "text": "You’re done!¶"
+    }
+  ],
+  "paragraphs": [
+    "Note",
+    "Before proceeding, install Manim and make sure it is running properly by\nfollowing the steps inInstallation. For\ninformation on using Manim with Jupyterlab or Jupyter notebook, go to the\ndocumentation for theIPythonmagiccommand,%%manim.",
+    "Important",
+    "If you installed Manim in the recommended way, using the\nPython management tooluv, then you either need to make sure the corresponding\nvirtual environment is activated (follow the instructions printed on runninguvvenv),\nor you need to remember to prefix themanimcommand in the console withuvrun;\nthat is,uvrunmanim....",
+    "This quickstart guide will lead you through creating a sample project using Manim: an animation\nengine for precise programmatic animations.",
+    "First, you will use a command line\ninterface to create aScene, the class through which Manim generates videos.\nIn theSceneyou will animate a circle. Then you will add anotherSceneshowing\na square transforming into a circle. This will be your introduction to Manim’s animation ability.\nAfterwards, you will position multiple mathematical objects (Mobjects). Finally, you\nwill learn the.animatesyntax, a powerful feature that animates the methods you\nuse to modifyMobjects.",
+    "Start by creating a new folder:",
+    "Themy-projectfolder is the root folder for your project. It contains all the files that Manim needs to function,\nas well as any output that your project produces.",
+    "Open a text editor, such as Notepad. Open the filemain.pyin themy-projectfolder.\nIt should look something like this:",
+    "Open the command line, navigate to your project folder, and execute\nthe following command:",
+    "Manim will output rendering information, then create an MP4 file.\nYour default movie player will play the MP4 file, displaying the following animation.",
+    "If you see an animation of a pink circle being drawn, congratulations!\nYou just wrote your first Manim scene from scratch.",
+    "If you get an error\nmessage instead, you do not see a video, or if the video output does not\nlook like the preceding animation, it is likely that Manim has not been\ninstalled correctly. Please refer to ourFAQ sectionfor help with the most common issues.",
+    "Let’s go over the script you just executed line by line to see how Manim was\nable to draw the circle.",
+    "The first line imports all of the contents of the library:",
+    "This is the recommended way of using Manim, as a single script often uses\nmultiple names from the Manim namespace. In your script, you imported and usedScene,Circle,PINKandCreate.",
+    "Now let’s look at the next two lines:",
+    "Most of the time, the code for scripting an animation is entirely contained within\ntheconstruct()method of aSceneclass.\nInsideconstruct(), you can create objects, display them on screen, and animate them.",
+    "The next two lines create a circle and set its color and opacity:",
+    "Finally, the last line uses the animationCreateto display the\ncircle on your screen:",
+    "Tip",
+    "All animations must reside within theconstruct()method of a\nclass derived fromScene.  Other code, such as auxiliary\nor mathematical functions, may reside outside the class.",
+    "With our circle animation complete, let’s move on to something a little more complicated.",
+    "Openscene.py, and add the following code snippet below theCreateCircleclass:",
+    "RenderSquareToCircleby running the following command in the command line:",
+    "The following animation will render:",
+    "This example shows one of the primary features of Manim: the ability to\nimplement complicated and mathematically intensive animations (such as cleanly\ninterpolating between two geometric shapes) with just a few lines of code.",
+    "Next, let’s go over some basic techniques for positioningMobjects.",
+    "Openscene.py, and add the following code snippet below theSquareToCirclemethod:",
+    "RenderSquareAndCircleby running the following command in the command line:",
+    "The following animation will render:",
+    "next_tois aMobjectmethod for positioningMobjects.",
+    "We first specified\nthe pink circle as the square’s reference point by passingcircleas the method’s first argument.\nThe second argument is used to specify the direction theMobjectis placed relative to the reference point.\nIn this case, we set the direction toRIGHT, telling Manim to position the square to the right of the circle.\nFinally,buff=0.5applied a small distance buffer between the two objects.",
+    "Try changingRIGHTtoLEFT,UP, orDOWNinstead, and see how that changes the position of the square.",
+    "Using positioning methods, you can render a scene with multipleMobjects,\nsetting their locations in the scene using coordinates or positioning them\nrelative to each other.",
+    "For more information onnext_toand other positioning methods, check out the\nlist ofMobjectmethods in our reference manual.",
+    "The final lesson in this tutorial is using.animate, aMobjectmethod which\nanimates changes you make to aMobject. When you prepend.animateto any\nmethod call that modifies aMobject, the method becomes an animation which\ncan be played usingself.play. Let’s return toSquareToCircleto see the\ndifferences between using methods when creating aMobject,\nand animating those method calls with.animate.",
+    "Openscene.py, and add the following code snippet below theSquareAndCircleclass:",
+    "RenderAnimatedSquareToCircleby running the following command in the command line:",
+    "The following animation will render:",
+    "The firstself.playcreates the square. The second animates rotating it 45 degrees.\nThe third transforms the square into a circle, and the last colors the circle pink.\nAlthough the end result is the same as that ofSquareToCircle,.animateshowsrotateandset_fillbeing applied to theMobjectdynamically, instead of creating them\nwith the changes already applied.",
+    "Try other methods, likefliporshift, and see what happens.",
+    "Openscene.py, and add the following code snippet below theAnimatedSquareToCircleclass:",
+    "RenderDifferentRotationsby running the following command in the command line:",
+    "The following animation will render:",
+    "ThisSceneillustrates the quirks of.animate. When using.animate, Manim\nactually takes aMobject’s starting state and its ending state and interpolates the two.\nIn theAnimatedSquareToCircleclass, you can observe this when the square rotates:\nthe corners of the square appear to contract slightly as they move into the positions required\nfor the first square to transform into the second one.",
+    "InDifferentRotations, the difference between.animate’s interpretation of rotation and theRotatemethod is far more apparent. The starting and ending states of aMobjectrotated 180 degrees\nare the same, so.animatetries to interpolate two identical objects and the result is the left square.\nIf you find that your own usage of.animateis causing similar unwanted behavior, consider\nusing conventional animation methods like the right square, which usesRotate.",
+    "The difference betweenTransformandReplacementTransformis thatTransform(mob1,mob2)transforms the points\n(as well as other attributes like color) ofmob1into the points/attributes ofmob2.",
+    "ReplacementTransform(mob1,mob2)on the other hand literally replacesmob1on the scene withmob2.",
+    "The use ofReplacementTransformorTransformis mostly up to personal preference. They can be used to accomplish the same effect, as shown below.",
+    "However, in some cases it is more beneficial to useTransform, like when you are transforming several mobjects one after the other.\nThe code below avoids having to keep a reference to the last mobject that was transformed.",
+    "Example: TransformCycle¶",
+    "With a working installation of Manim and this sample project under your belt,\nyou’re ready to start creating animations of your own.  To learn\nmore about what Manim is doing under the hood, move on to the next tutorial:Manim’s Output Settings.  For an overview of\nManim’s features, as well as its configuration and other settings, check out the\notherTutorials.  For a list of all available features, refer to theReference Manualpage."
+  ],
+  "links": [
+    {
+      "text": "Skip to content",
+      "href": "#furo-main-content"
+    },
+    {
+      "text": "Manim Community v0.20.1",
+      "href": "../index.html"
+    },
+    {
+      "text": "Manim Community v0.20.1",
+      "href": "../index.html"
+    },
+    {
+      "text": "Example Gallery",
+      "href": "../examples.html"
+    },
+    {
+      "text": "Installation",
+      "href": "../installation.html"
+    },
+    {
+      "text": "Installing Manim locally",
+      "href": "../installation/uv.html"
+    },
+    {
+      "text": "Conda",
+      "href": "../installation/conda.html"
+    },
+    {
+      "text": "Docker",
+      "href": "../installation/docker.html"
+    },
+    {
+      "text": "Jupyter Notebooks",
+      "href": "../installation/jupyter.html"
+    },
+    {
+      "text": "Tutorials & Guides",
+      "href": "../tutorials_guides.html"
+    },
+    {
+      "text": "Tutorials",
+      "href": "index.html"
+    },
+    {
+      "text": "Quickstart",
+      "href": "#"
+    },
+    {
+      "text": "Manim’s Output Settings",
+      "href": "output_and_config.html"
+    },
+    {
+      "text": "Manim’s building blocks",
+      "href": "building_blocks.html"
+    },
+    {
+      "text": "Thematic Guides",
+      "href": "../guides/index.html"
+    },
+    {
+      "text": "Configuration",
+      "href": "../guides/configuration.html"
+    },
+    {
+      "text": "A deep dive into Manim’s internals",
+      "href": "../guides/deep_dive.html"
+    },
+    {
+      "text": "Rendering Text and Formulas",
+      "href": "../guides/using_text.html"
+    },
+    {
+      "text": "Adding Voiceovers to Videos",
+      "href": "../guides/add_voiceovers.html"
+    },
+    {
+      "text": "Frequently Asked Questions",
+      "href": "../faq/index.html"
+    },
+    {
+      "text": "FAQ: General Usage",
+      "href": "../faq/general.html"
+    },
+    {
+      "text": "FAQ: Getting Help",
+      "href": "../faq/help.html"
+    },
+    {
+      "text": "FAQ: Installation",
+      "href": "../faq/installation.html"
+    },
+    {
+      "text": "Where can I learn more about Manim’s internal structure?",
+      "href": "../faq/internals.html"
+    },
+    {
+      "text": "FAQ: OpenGL rendering",
+      "href": "../faq/opengl.html"
+    },
+    {
+      "text": "Reference Manual",
+      "href": "../reference.html"
+    },
+    {
+      "text": "Animations",
+      "href": "../reference_index/animations.html"
+    },
+    {
+      "text": "animation",
+      "href": "../reference/manim.animation.animation.html"
+    },
+    {
+      "text": "Add",
+      "href": "../reference/manim.animation.animation.Add.html"
+    },
+    {
+      "text": "Animation",
+      "href": "../reference/manim.animation.animation.Animation.html"
+    },
+    {
+      "text": "Wait",
+      "href": "../reference/manim.animation.animation.Wait.html"
+    },
+    {
+      "text": "changing",
+      "href": "../reference/manim.animation.changing.html"
+    },
+    {
+      "text": "AnimatedBoundary",
+      "href": "../reference/manim.animation.changing.AnimatedBoundary.html"
+    },
+    {
+      "text": "TracedPath",
+      "href": "../reference/manim.animation.changing.TracedPath.html"
+    },
+    {
+      "text": "composition",
+      "href": "../reference/manim.animation.composition.html"
+    },
+    {
+      "text": "AnimationGroup",
+      "href": "../reference/manim.animation.composition.AnimationGroup.html"
+    },
+    {
+      "text": "LaggedStart",
+      "href": "../reference/manim.animation.composition.LaggedStart.html"
+    },
+    {
+      "text": "LaggedStartMap",
+      "href": "../reference/manim.animation.composition.LaggedStartMap.html"
+    },
+    {
+      "text": "Succession",
+      "href": "../reference/manim.animation.composition.Succession.html"
+    },
+    {
+      "text": "creation",
+      "href": "../reference/manim.animation.creation.html"
+    },
+    {
+      "text": "AddTextLetterByLetter",
+      "href": "../reference/manim.animation.creation.AddTextLetterByLetter.html"
+    },
+    {
+      "text": "AddTextWordByWord",
+      "href": "../reference/manim.animation.creation.AddTextWordByWord.html"
+    },
+    {
+      "text": "Create",
+      "href": "../reference/manim.animation.creation.Create.html"
+    },
+    {
+      "text": "DrawBorderThenFill",
+      "href": "../reference/manim.animation.creation.DrawBorderThenFill.html"
+    },
+    {
+      "text": "RemoveTextLetterByLetter",
+      "href": "../reference/manim.animation.creation.RemoveTextLetterByLetter.html"
+    },
+    {
+      "text": "ShowIncreasingSubsets",
+      "href": "../reference/manim.animation.creation.ShowIncreasingSubsets.html"
+    },
+    {
+      "text": "ShowPartial",
+      "href": "../reference/manim.animation.creation.ShowPartial.html"
+    },
+    {
+      "text": "ShowSubmobjectsOneByOne",
+      "href": "../reference/manim.animation.creation.ShowSubmobjectsOneByOne.html"
+    },
+    {
+      "text": "SpiralIn",
+      "href": "../reference/manim.animation.creation.SpiralIn.html"
+    },
+    {
+      "text": "TypeWithCursor",
+      "href": "../reference/manim.animation.creation.TypeWithCursor.html"
+    },
+    {
+      "text": "Uncreate",
+      "href": "../reference/manim.animation.creation.Uncreate.html"
+    },
+    {
+      "text": "UntypeWithCursor",
+      "href": "../reference/manim.animation.creation.UntypeWithCursor.html"
+    },
+    {
+      "text": "Unwrite",
+      "href": "../reference/manim.animation.creation.Unwrite.html"
+    },
+    {
+      "text": "Write",
+      "href": "../reference/manim.animation.creation.Write.html"
+    },
+    {
+      "text": "fading",
+      "href": "../reference/manim.animation.fading.html"
+    },
+    {
+      "text": "FadeIn",
+      "href": "../reference/manim.animation.fading.FadeIn.html"
+    },
+    {
+      "text": "FadeOut",
+      "href": "../reference/manim.animation.fading.FadeOut.html"
+    },
+    {
+      "text": "growing",
+      "href": "../reference/manim.animation.growing.html"
+    },
+    {
+      "text": "GrowArrow",
+      "href": "../reference/manim.animation.growing.GrowArrow.html"
+    },
+    {
+      "text": "GrowFromCenter",
+      "href": "../reference/manim.animation.growing.GrowFromCenter.html"
+    },
+    {
+      "text": "GrowFromEdge",
+      "href": "../reference/manim.animation.growing.GrowFromEdge.html"
+    },
+    {
+      "text": "GrowFromPoint",
+      "href": "../reference/manim.animation.growing.GrowFromPoint.html"
+    },
+    {
+      "text": "SpinInFromNothing",
+      "href": "../reference/manim.animation.growing.SpinInFromNothing.html"
+    },
+    {
+      "text": "indication",
+      "href": "../reference/manim.animation.indication.html"
+    },
+    {
+      "text": "ApplyWave",
+      "href": "../reference/manim.animation.indication.ApplyWave.html"
+    },
+    {
+      "text": "Blink",
+      "href": "../reference/manim.animation.indication.Blink.html"
+    },
+    {
+      "text": "Circumscribe",
+      "href": "../reference/manim.animation.indication.Circumscribe.html"
+    },
+    {
+      "text": "Flash",
+      "href": "../reference/manim.animation.indication.Flash.html"
+    },
+    {
+      "text": "FocusOn",
+      "href": "../reference/manim.animation.indication.FocusOn.html"
+    },
+    {
+      "text": "Indicate",
+      "href": "../reference/manim.animation.indication.Indicate.html"
+    },
+    {
+      "text": "ShowPassingFlash",
+      "href": "../reference/manim.animation.indication.ShowPassingFlash.html"
+    },
+    {
+      "text": "ShowPassingFlashWithThinningStrokeWidth",
+      "href": "../reference/manim.animation.indication.ShowPassingFlashWithThinningStrokeWidth.html"
+    },
+    {
+      "text": "Wiggle",
+      "href": "../reference/manim.animation.indication.Wiggle.html"
+    },
+    {
+      "text": "movement",
+      "href": "../reference/manim.animation.movement.html"
+    },
+    {
+      "text": "ComplexHomotopy",
+      "href": "../reference/manim.animation.movement.ComplexHomotopy.html"
+    },
+    {
+      "text": "Homotopy",
+      "href": "../reference/manim.animation.movement.Homotopy.html"
+    },
+    {
+      "text": "MoveAlongPath",
+      "href": "../reference/manim.animation.movement.MoveAlongPath.html"
+    },
+    {
+      "text": "PhaseFlow",
+      "href": "../reference/manim.animation.movement.PhaseFlow.html"
+    },
+    {
+      "text": "SmoothedVectorizedHomotopy",
+      "href": "../reference/manim.animation.movement.SmoothedVectorizedHomotopy.html"
+    },
+    {
+      "text": "numbers",
+      "href": "../reference/manim.animation.numbers.html"
+    },
+    {
+      "text": "ChangeDecimalToValue",
+      "href": "../reference/manim.animation.numbers.ChangeDecimalToValue.html"
+    },
+    {
+      "text": "ChangingDecimal",
+      "href": "../reference/manim.animation.numbers.ChangingDecimal.html"
+    },
+    {
+      "text": "rotation",
+      "href": "../reference/manim.animation.rotation.html"
+    },
+    {
+      "text": "Rotate",
+      "href": "../reference/manim.animation.rotation.Rotate.html"
+    },
+    {
+      "text": "Rotating",
+      "href": "../reference/manim.animation.rotation.Rotating.html"
+    },
+    {
+      "text": "specialized",
+      "href": "../reference/manim.animation.specialized.html"
+    },
+    {
+      "text": "Broadcast",
+      "href": "../reference/manim.animation.specialized.Broadcast.html"
+    },
+    {
+      "text": "speedmodifier",
+      "href": "../reference/manim.animation.speedmodifier.html"
+    },
+    {
+      "text": "ChangeSpeed",
+      "href": "../reference/manim.animation.speedmodifier.ChangeSpeed.html"
+    },
+    {
+      "text": "transform",
+      "href": "../reference/manim.animation.transform.html"
+    },
+    {
+      "text": "ApplyComplexFunction",
+      "href": "../reference/manim.animation.transform.ApplyComplexFunction.html"
+    },
+    {
+      "text": "ApplyFunction",
+      "href": "../reference/manim.animation.transform.ApplyFunction.html"
+    },
+    {
+      "text": "ApplyMatrix",
+      "href": "../reference/manim.animation.transform.ApplyMatrix.html"
+    },
+    {
+      "text": "ApplyMethod",
+      "href": "../reference/manim.animation.transform.ApplyMethod.html"
+    },
+    {
+      "text": "ApplyPointwiseFunction",
+      "href": "../reference/manim.animation.transform.ApplyPointwiseFunction.html"
+    },
+    {
+      "text": "ApplyPointwiseFunctionToCenter",
+      "href": "../reference/manim.animation.transform.ApplyPointwiseFunctionToCenter.html"
+    },
+    {
+      "text": "ClockwiseTransform",
+      "href": "../reference/manim.animation.transform.ClockwiseTransform.html"
+    },
+    {
+      "text": "CounterclockwiseTransform",
+      "href": "../reference/manim.animation.transform.CounterclockwiseTransform.html"
+    },
+    {
+      "text": "CyclicReplace",
+      "href": "../reference/manim.animation.transform.CyclicReplace.html"
+    },
+    {
+      "text": "FadeToColor",
+      "href": "../reference/manim.animation.transform.FadeToColor.html"
+    },
+    {
+      "text": "FadeTransform",
+      "href": "../reference/manim.animation.transform.FadeTransform.html"
+    },
+    {
+      "text": "FadeTransformPieces",
+      "href": "../reference/manim.animation.transform.FadeTransformPieces.html"
+    },
+    {
+      "text": "MoveToTarget",
+      "href": "../reference/manim.animation.transform.MoveToTarget.html"
+    },
+    {
+      "text": "ReplacementTransform",
+      "href": "../reference/manim.animation.transform.ReplacementTransform.html"
+    },
+    {
+      "text": "Restore",
+      "href": "../reference/manim.animation.transform.Restore.html"
+    },
+    {
+      "text": "ScaleInPlace",
+      "href": "../reference/manim.animation.transform.ScaleInPlace.html"
+    },
+    {
+      "text": "ShrinkToCenter",
+      "href": "../reference/manim.animation.transform.ShrinkToCenter.html"
+    },
+    {
+      "text": "Swap",
+      "href": "../reference/manim.animation.transform.Swap.html"
+    },
+    {
+      "text": "Transform",
+      "href": "../reference/manim.animation.transform.Transform.html"
+    },
+    {
+      "text": "TransformAnimations",
+      "href": "../reference/manim.animation.transform.TransformAnimations.html"
+    },
+    {
+      "text": "TransformFromCopy",
+      "href": "../reference/manim.animation.transform.TransformFromCopy.html"
+    },
+    {
+      "text": "transform_matching_parts",
+      "href": "../reference/manim.animation.transform_matching_parts.html"
+    },
+    {
+      "text": "TransformMatchingAbstractBase",
+      "href": "../reference/manim.animation.transform_matching_parts.TransformMatchingAbstractBase.html"
+    },
+    {
+      "text": "TransformMatchingShapes",
+      "href": "../reference/manim.animation.transform_matching_parts.TransformMatchingShapes.html"
+    },
+    {
+      "text": "TransformMatchingTex",
+      "href": "../reference/manim.animation.transform_matching_parts.TransformMatchingTex.html"
+    },
+    {
+      "text": "updaters",
+      "href": "../reference/manim.animation.updaters.html"
+    },
+    {
+      "text": "mobject_update_utils",
+      "href": "../reference/manim.animation.updaters.mobject_update_utils.html"
+    },
+    {
+      "text": "update",
+      "href": "../reference/manim.animation.updaters.update.html"
+    },
+    {
+      "text": "MaintainPositionRelativeTo",
+      "href": "../reference/manim.animation.updaters.update.MaintainPositionRelativeTo.html"
+    },
+    {
+      "text": "UpdateFromAlphaFunc",
+      "href": "../reference/manim.animation.updaters.update.UpdateFromAlphaFunc.html"
+    },
+    {
+      "text": "UpdateFromFunc",
+      "href": "../reference/manim.animation.updaters.update.UpdateFromFunc.html"
+    },
+    {
+      "text": "Cameras",
+      "href": "../reference_index/cameras.html"
+    },
+    {
+      "text": "camera",
+      "href": "../reference/manim.camera.camera.html"
+    },
+    {
+      "text": "BackgroundColoredVMobjectDisplayer",
+      "href": "../reference/manim.camera.camera.BackgroundColoredVMobjectDisplayer.html"
+    },
+    {
+      "text": "Camera",
+      "href": "../reference/manim.camera.camera.Camera.html"
+    },
+    {
+      "text": "mapping_camera",
+      "href": "../reference/manim.camera.mapping_camera.html"
+    },
+    {
+      "text": "MappingCamera",
+      "href": "../reference/manim.camera.mapping_camera.MappingCamera.html"
+    },
+    {
+      "text": "OldMultiCamera",
+      "href": "../reference/manim.camera.mapping_camera.OldMultiCamera.html"
+    },
+    {
+      "text": "SplitScreenCamera",
+      "href": "../reference/manim.camera.mapping_camera.SplitScreenCamera.html"
+    },
+    {
+      "text": "moving_camera",
+      "href": "../reference/manim.camera.moving_camera.html"
+    },
+    {
+      "text": "MovingCamera",
+      "href": "../reference/manim.camera.moving_camera.MovingCamera.html"
+    },
+    {
+      "text": "multi_camera",
+      "href": "../reference/manim.camera.multi_camera.html"
+    },
+    {
+      "text": "MultiCamera",
+      "href": "../reference/manim.camera.multi_camera.MultiCamera.html"
+    },
+    {
+      "text": "three_d_camera",
+      "href": "../reference/manim.camera.three_d_camera.html"
+    },
+    {
+      "text": "ThreeDCamera",
+      "href": "../reference/manim.camera.three_d_camera.ThreeDCamera.html"
+    },
+    {
+      "text": "Configuration",
+      "href": "../reference_index/configuration.html"
+    },
+    {
+      "text": "_config",
+      "href": "../reference/manim._config.html"
+    },
+    {
+      "text": "utils",
+      "href": "../reference/manim._config.utils.html"
+    },
+    {
+      "text": "ManimConfig",
+      "href": "../reference/manim._config.utils.ManimConfig.html"
+    },
+    {
+      "text": "ManimFrame",
+      "href": "../reference/manim._config.utils.ManimFrame.html"
+    },
+    {
+      "text": "logger_utils",
+      "href": "../reference/manim._config.logger_utils.html"
+    },
+    {
+      "text": "JSONFormatter",
+      "href": "../reference/manim._config.logger_utils.JSONFormatter.html"
+    },
+    {
+      "text": "Mobjects",
+      "href": "../reference_index/mobjects.html"
+    },
+    {
+      "text": "frame",
+      "href": "../reference/manim.mobject.frame.html"
+    },
+    {
+      "text": "FullScreenRectangle",
+      "href": "../reference/manim.mobject.frame.FullScreenRectangle.html"
+    },
+    {
+      "text": "ScreenRectangle",
+      "href": "../reference/manim.mobject.frame.ScreenRectangle.html"
+    },
+    {
+      "text": "geometry",
+      "href": "../reference/manim.mobject.geometry.html"
+    },
+    {
+      "text": "arc",
+      "href": "../reference/manim.mobject.geometry.arc.html"
+    },
+    {
+      "text": "AnnotationDot",
+      "href": "../reference/manim.mobject.geometry.arc.AnnotationDot.html"
+    },
+    {
+      "text": "AnnularSector",
+      "href": "../reference/manim.mobject.geometry.arc.AnnularSector.html"
+    },
+    {
+      "text": "Annulus",
+      "href": "../reference/manim.mobject.geometry.arc.Annulus.html"
+    },
+    {
+      "text": "Arc",
+      "href": "../reference/manim.mobject.geometry.arc.Arc.html"
+    },
+    {
+      "text": "ArcBetweenPoints",
+      "href": "../reference/manim.mobject.geometry.arc.ArcBetweenPoints.html"
+    },
+    {
+      "text": "ArcPolygon",
+      "href": "../reference/manim.mobject.geometry.arc.ArcPolygon.html"
+    },
+    {
+      "text": "ArcPolygonFromArcs",
+      "href": "../reference/manim.mobject.geometry.arc.ArcPolygonFromArcs.html"
+    },
+    {
+      "text": "Circle",
+      "href": "../reference/manim.mobject.geometry.arc.Circle.html"
+    },
+    {
+      "text": "CubicBezier",
+      "href": "../reference/manim.mobject.geometry.arc.CubicBezier.html"
+    },
+    {
+      "text": "CurvedArrow",
+      "href": "../reference/manim.mobject.geometry.arc.CurvedArrow.html"
+    },
+    {
+      "text": "CurvedDoubleArrow",
+      "href": "../reference/manim.mobject.geometry.arc.CurvedDoubleArrow.html"
+    },
+    {
+      "text": "Dot",
+      "href": "../reference/manim.mobject.geometry.arc.Dot.html"
+    },
+    {
+      "text": "Ellipse",
+      "href": "../reference/manim.mobject.geometry.arc.Ellipse.html"
+    },
+    {
+      "text": "LabeledDot",
+      "href": "../reference/manim.mobject.geometry.arc.LabeledDot.html"
+    },
+    {
+      "text": "Sector",
+      "href": "../reference/manim.mobject.geometry.arc.Sector.html"
+    },
+    {
+      "text": "TangentialArc",
+      "href": "../reference/manim.mobject.geometry.arc.TangentialArc.html"
+    },
+    {
+      "text": "TipableVMobject",
+      "href": "../reference/manim.mobject.geometry.arc.TipableVMobject.html"
+    },
+    {
+      "text": "boolean_ops",
+      "href": "../reference/manim.mobject.geometry.boolean_ops.html"
+    },
+    {
+      "text": "Difference",
+      "href": "../reference/manim.mobject.geometry.boolean_ops.Difference.html"
+    },
+    {
+      "text": "Exclusion",
+      "href": "../reference/manim.mobject.geometry.boolean_ops.Exclusion.html"
+    },
+    {
+      "text": "Intersection",
+      "href": "../reference/manim.mobject.geometry.boolean_ops.Intersection.html"
+    },
+    {
+      "text": "Union",
+      "href": "../reference/manim.mobject.geometry.boolean_ops.Union.html"
+    },
+    {
+      "text": "labeled",
+      "href": "../reference/manim.mobject.geometry.labeled.html"
+    },
+    {
+      "text": "Label",
+      "href": "../reference/manim.mobject.geometry.labeled.Label.html"
+    },
+    {
+      "text": "LabeledArrow",
+      "href": "../reference/manim.mobject.geometry.labeled.LabeledArrow.html"
+    },
+    {
+      "text": "LabeledLine",
+      "href": "../reference/manim.mobject.geometry.labeled.LabeledLine.html"
+    },
+    {
+      "text": "LabeledPolygram",
+      "href": "../reference/manim.mobject.geometry.labeled.LabeledPolygram.html"
+    },
+    {
+      "text": "line",
+      "href": "../reference/manim.mobject.geometry.line.html"
+    },
+    {
+      "text": "Angle",
+      "href": "../reference/manim.mobject.geometry.line.Angle.html"
+    },
+    {
+      "text": "Arrow",
+      "href": "../reference/manim.mobject.geometry.line.Arrow.html"
+    },
+    {
+      "text": "DashedLine",
+      "href": "../reference/manim.mobject.geometry.line.DashedLine.html"
+    },
+    {
+      "text": "DoubleArrow",
+      "href": "../reference/manim.mobject.geometry.line.DoubleArrow.html"
+    },
+    {
+      "text": "Elbow",
+      "href": "../reference/manim.mobject.geometry.line.Elbow.html"
+    },
+    {
+      "text": "Line",
+      "href": "../reference/manim.mobject.geometry.line.Line.html"
+    },
+    {
+      "text": "RightAngle",
+      "href": "../reference/manim.mobject.geometry.line.RightAngle.html"
+    },
+    {
+      "text": "TangentLine",
+      "href": "../reference/manim.mobject.geometry.line.TangentLine.html"
+    },
+    {
+      "text": "Vector",
+      "href": "../reference/manim.mobject.geometry.line.Vector.html"
+    },
+    {
+      "text": "polygram",
+      "href": "../reference/manim.mobject.geometry.polygram.html"
+    },
+    {
+      "text": "ConvexHull",
+      "href": "../reference/manim.mobject.geometry.polygram.ConvexHull.html"
+    },
+    {
+      "text": "Cutout",
+      "href": "../reference/manim.mobject.geometry.polygram.Cutout.html"
+    },
+    {
+      "text": "Polygon",
+      "href": "../reference/manim.mobject.geometry.polygram.Polygon.html"
+    },
+    {
+      "text": "Polygram",
+      "href": "../reference/manim.mobject.geometry.polygram.Polygram.html"
+    },
+    {
+      "text": "Rectangle",
+      "href": "../reference/manim.mobject.geometry.polygram.Rectangle.html"
+    },
+    {
+      "text": "RegularPolygon",
+      "href": "../reference/manim.mobject.geometry.polygram.RegularPolygon.html"
+    },
+    {
+      "text": "RegularPolygram",
+      "href": "../reference/manim.mobject.geometry.polygram.RegularPolygram.html"
+    },
+    {
+      "text": "RoundedRectangle",
+      "href": "../reference/manim.mobject.geometry.polygram.RoundedRectangle.html"
+    },
+    {
+      "text": "Square",
+      "href": "../reference/manim.mobject.geometry.polygram.Square.html"
+    },
+    {
+      "text": "Star",
+      "href": "../reference/manim.mobject.geometry.polygram.Star.html"
+    },
+    {
+      "text": "Triangle",
+      "href": "../reference/manim.mobject.geometry.polygram.Triangle.html"
+    },
+    {
+      "text": "shape_matchers",
+      "href": "../reference/manim.mobject.geometry.shape_matchers.html"
+    },
+    {
+      "text": "BackgroundRectangle",
+      "href": "../reference/manim.mobject.geometry.shape_matchers.BackgroundRectangle.html"
+    },
+    {
+      "text": "Cross",
+      "href": "../reference/manim.mobject.geometry.shape_matchers.Cross.html"
+    },
+    {
+      "text": "SurroundingRectangle",
+      "href": "../reference/manim.mobject.geometry.shape_matchers.SurroundingRectangle.html"
+    },
+    {
+      "text": "Underline",
+      "href": "../reference/manim.mobject.geometry.shape_matchers.Underline.html"
+    },
+    {
+      "text": "tips",
+      "href": "../reference/manim.mobject.geometry.tips.html"
+    },
+    {
+      "text": "ArrowCircleFilledTip",
+      "href": "../reference/manim.mobject.geometry.tips.ArrowCircleFilledTip.html"
+    },
+    {
+      "text": "ArrowCircleTip",
+      "href": "../reference/manim.mobject.geometry.tips.ArrowCircleTip.html"
+    },
+    {
+      "text": "ArrowSquareFilledTip",
+      "href": "../reference/manim.mobject.geometry.tips.ArrowSquareFilledTip.html"
+    },
+    {
+      "text": "ArrowSquareTip",
+      "href": "../reference/manim.mobject.geometry.tips.ArrowSquareTip.html"
+    },
+    {
+      "text": "ArrowTip",
+      "href": "../reference/manim.mobject.geometry.tips.ArrowTip.html"
+    },
+    {
+      "text": "ArrowTriangleFilledTip",
+      "href": "../reference/manim.mobject.geometry.tips.ArrowTriangleFilledTip.html"
+    },
+    {
+      "text": "ArrowTriangleTip",
+      "href": "../reference/manim.mobject.geometry.tips.ArrowTriangleTip.html"
+    },
+    {
+      "text": "StealthTip",
+      "href": "../reference/manim.mobject.geometry.tips.StealthTip.html"
+    },
+    {
+      "text": "graph",
+      "href": "../reference/manim.mobject.graph.html"
+    },
+    {
+      "text": "DiGraph",
+      "href": "../reference/manim.mobject.graph.DiGraph.html"
+    },
+    {
+      "text": "GenericGraph",
+      "href": "../reference/manim.mobject.graph.GenericGraph.html"
+    },
+    {
+      "text": "Graph",
+      "href": "../reference/manim.mobject.graph.Graph.html"
+    },
+    {
+      "text": "LayoutFunction",
+      "href": "../reference/manim.mobject.graph.LayoutFunction.html"
+    },
+    {
+      "text": "graphing",
+      "href": "../reference/manim.mobject.graphing.html"
+    },
+    {
+      "text": "coordinate_systems",
+      "href": "../reference/manim.mobject.graphing.coordinate_systems.html"
+    },
+    {
+      "text": "Axes",
+      "href": "../reference/manim.mobject.graphing.coordinate_systems.Axes.html"
+    },
+    {
+      "text": "ComplexPlane",
+      "href": "../reference/manim.mobject.graphing.coordinate_systems.ComplexPlane.html"
+    },
+    {
+      "text": "CoordinateSystem",
+      "href": "../reference/manim.mobject.graphing.coordinate_systems.CoordinateSystem.html"
+    },
+    {
+      "text": "NumberPlane",
+      "href": "../reference/manim.mobject.graphing.coordinate_systems.NumberPlane.html"
+    },
+    {
+      "text": "PolarPlane",
+      "href": "../reference/manim.mobject.graphing.coordinate_systems.PolarPlane.html"
+    },
+    {
+      "text": "ThreeDAxes",
+      "href": "../reference/manim.mobject.graphing.coordinate_systems.ThreeDAxes.html"
+    },
+    {
+      "text": "functions",
+      "href": "../reference/manim.mobject.graphing.functions.html"
+    },
+    {
+      "text": "FunctionGraph",
+      "href": "../reference/manim.mobject.graphing.functions.FunctionGraph.html"
+    },
+    {
+      "text": "ImplicitFunction",
+      "href": "../reference/manim.mobject.graphing.functions.ImplicitFunction.html"
+    },
+    {
+      "text": "ParametricFunction",
+      "href": "../reference/manim.mobject.graphing.functions.ParametricFunction.html"
+    },
+    {
+      "text": "number_line",
+      "href": "../reference/manim.mobject.graphing.number_line.html"
+    },
+    {
+      "text": "NumberLine",
+      "href": "../reference/manim.mobject.graphing.number_line.NumberLine.html"
+    },
+    {
+      "text": "UnitInterval",
+      "href": "../reference/manim.mobject.graphing.number_line.UnitInterval.html"
+    },
+    {
+      "text": "probability",
+      "href": "../reference/manim.mobject.graphing.probability.html"
+    },
+    {
+      "text": "BarChart",
+      "href": "../reference/manim.mobject.graphing.probability.BarChart.html"
+    },
+    {
+      "text": "SampleSpace",
+      "href": "../reference/manim.mobject.graphing.probability.SampleSpace.html"
+    },
+    {
+      "text": "scale",
+      "href": "../reference/manim.mobject.graphing.scale.html"
+    },
+    {
+      "text": "LinearBase",
+      "href": "../reference/manim.mobject.graphing.scale.LinearBase.html"
+    },
+    {
+      "text": "LogBase",
+      "href": "../reference/manim.mobject.graphing.scale.LogBase.html"
+    },
+    {
+      "text": "logo",
+      "href": "../reference/manim.mobject.logo.html"
+    },
+    {
+      "text": "ManimBanner",
+      "href": "../reference/manim.mobject.logo.ManimBanner.html"
+    },
+    {
+      "text": "matrix",
+      "href": "../reference/manim.mobject.matrix.html"
+    },
+    {
+      "text": "DecimalMatrix",
+      "href": "../reference/manim.mobject.matrix.DecimalMatrix.html"
+    },
+    {
+      "text": "IntegerMatrix",
+      "href": "../reference/manim.mobject.matrix.IntegerMatrix.html"
+    },
+    {
+      "text": "Matrix",
+      "href": "../reference/manim.mobject.matrix.Matrix.html"
+    },
+    {
+      "text": "MobjectMatrix",
+      "href": "../reference/manim.mobject.matrix.MobjectMatrix.html"
+    },
+    {
+      "text": "mobject",
+      "href": "../reference/manim.mobject.mobject.html"
+    },
+    {
+      "text": "Group",
+      "href": "../reference/manim.mobject.mobject.Group.html"
+    },
+    {
+      "text": "Mobject",
+      "href": "../reference/manim.mobject.mobject.Mobject.html"
+    },
+    {
+      "text": "svg",
+      "href": "../reference/manim.mobject.svg.html"
+    },
+    {
+      "text": "brace",
+      "href": "../reference/manim.mobject.svg.brace.html"
+    },
+    {
+      "text": "ArcBrace",
+      "href": "../reference/manim.mobject.svg.brace.ArcBrace.html"
+    },
+    {
+      "text": "Brace",
+      "href": "../reference/manim.mobject.svg.brace.Brace.html"
+    },
+    {
+      "text": "BraceBetweenPoints",
+      "href": "../reference/manim.mobject.svg.brace.BraceBetweenPoints.html"
+    },
+    {
+      "text": "BraceLabel",
+      "href": "../reference/manim.mobject.svg.brace.BraceLabel.html"
+    },
+    {
+      "text": "BraceText",
+      "href": "../reference/manim.mobject.svg.brace.BraceText.html"
+    },
+    {
+      "text": "svg_mobject",
+      "href": "../reference/manim.mobject.svg.svg_mobject.html"
+    },
+    {
+      "text": "SVGMobject",
+      "href": "../reference/manim.mobject.svg.svg_mobject.SVGMobject.html"
+    },
+    {
+      "text": "VMobjectFromSVGPath",
+      "href": "../reference/manim.mobject.svg.svg_mobject.VMobjectFromSVGPath.html"
+    },
+    {
+      "text": "table",
+      "href": "../reference/manim.mobject.table.html"
+    },
+    {
+      "text": "DecimalTable",
+      "href": "../reference/manim.mobject.table.DecimalTable.html"
+    },
+    {
+      "text": "IntegerTable",
+      "href": "../reference/manim.mobject.table.IntegerTable.html"
+    },
+    {
+      "text": "MathTable",
+      "href": "../reference/manim.mobject.table.MathTable.html"
+    },
+    {
+      "text": "MobjectTable",
+      "href": "../reference/manim.mobject.table.MobjectTable.html"
+    },
+    {
+      "text": "Table",
+      "href": "../reference/manim.mobject.table.Table.html"
+    },
+    {
+      "text": "text",
+      "href": "../reference/manim.mobject.text.html"
+    },
+    {
+      "text": "code_mobject",
+      "href": "../reference/manim.mobject.text.code_mobject.html"
+    },
+    {
+      "text": "Code",
+      "href": "../reference/manim.mobject.text.code_mobject.Code.html"
+    },
+    {
+      "text": "numbers",
+      "href": "../reference/manim.mobject.text.numbers.html"
+    },
+    {
+      "text": "DecimalNumber",
+      "href": "../reference/manim.mobject.text.numbers.DecimalNumber.html"
+    },
+    {
+      "text": "Integer",
+      "href": "../reference/manim.mobject.text.numbers.Integer.html"
+    },
+    {
+      "text": "Variable",
+      "href": "../reference/manim.mobject.text.numbers.Variable.html"
+    },
+    {
+      "text": "tex_mobject",
+      "href": "../reference/manim.mobject.text.tex_mobject.html"
+    },
+    {
+      "text": "BulletedList",
+      "href": "../reference/manim.mobject.text.tex_mobject.BulletedList.html"
+    },
+    {
+      "text": "MathTex",
+      "href": "../reference/manim.mobject.text.tex_mobject.MathTex.html"
+    },
+    {
+      "text": "MathTexPart",
+      "href": "../reference/manim.mobject.text.tex_mobject.MathTexPart.html"
+    },
+    {
+      "text": "SingleStringMathTex",
+      "href": "../reference/manim.mobject.text.tex_mobject.SingleStringMathTex.html"
+    },
+    {
+      "text": "Tex",
+      "href": "../reference/manim.mobject.text.tex_mobject.Tex.html"
+    },
+    {
+      "text": "Title",
+      "href": "../reference/manim.mobject.text.tex_mobject.Title.html"
+    },
+    {
+      "text": "text_mobject",
+      "href": "../reference/manim.mobject.text.text_mobject.html"
+    },
+    {
+      "text": "MarkupText",
+      "href": "../reference/manim.mobject.text.text_mobject.MarkupText.html"
+    },
+    {
+      "text": "Paragraph",
+      "href": "../reference/manim.mobject.text.text_mobject.Paragraph.html"
+    },
+    {
+      "text": "Text",
+      "href": "../reference/manim.mobject.text.text_mobject.Text.html"
+    },
+    {
+      "text": "three_d",
+      "href": "../reference/manim.mobject.three_d.html"
+    },
+    {
+      "text": "polyhedra",
+      "href": "../reference/manim.mobject.three_d.polyhedra.html"
+    },
+    {
+      "text": "ConvexHull3D",
+      "href": "../reference/manim.mobject.three_d.polyhedra.ConvexHull3D.html"
+    },
+    {
+      "text": "Dodecahedron",
+      "href": "../reference/manim.mobject.three_d.polyhedra.Dodecahedron.html"
+    },
+    {
+      "text": "Icosahedron",
+      "href": "../reference/manim.mobject.three_d.polyhedra.Icosahedron.html"
+    },
+    {
+      "text": "Octahedron",
+      "href": "../reference/manim.mobject.three_d.polyhedra.Octahedron.html"
+    },
+    {
+      "text": "Polyhedron",
+      "href": "../reference/manim.mobject.three_d.polyhedra.Polyhedron.html"
+    },
+    {
+      "text": "Tetrahedron",
+      "href": "../reference/manim.mobject.three_d.polyhedra.Tetrahedron.html"
+    },
+    {
+      "text": "three_d_utils",
+      "href": "../reference/manim.mobject.three_d.three_d_utils.html"
+    },
+    {
+      "text": "three_dimensions",
+      "href": "../reference/manim.mobject.three_d.three_dimensions.html"
+    },
+    {
+      "text": "Arrow3D",
+      "href": "../reference/manim.mobject.three_d.three_dimensions.Arrow3D.html"
+    },
+    {
+      "text": "Cone",
+      "href": "../reference/manim.mobject.three_d.three_dimensions.Cone.html"
+    },
+    {
+      "text": "Cube",
+      "href": "../reference/manim.mobject.three_d.three_dimensions.Cube.html"
+    },
+    {
+      "text": "Cylinder",
+      "href": "../reference/manim.mobject.three_d.three_dimensions.Cylinder.html"
+    },
+    {
+      "text": "Dot3D",
+      "href": "../reference/manim.mobject.three_d.three_dimensions.Dot3D.html"
+    },
+    {
+      "text": "Line3D",
+      "href": "../reference/manim.mobject.three_d.three_dimensions.Line3D.html"
+    },
+    {
+      "text": "Prism",
+      "href": "../reference/manim.mobject.three_d.three_dimensions.Prism.html"
+    },
+    {
+      "text": "Sphere",
+      "href": "../reference/manim.mobject.three_d.three_dimensions.Sphere.html"
+    },
+    {
+      "text": "Surface",
+      "href": "../reference/manim.mobject.three_d.three_dimensions.Surface.html"
+    },
+    {
+      "text": "ThreeDVMobject",
+      "href": "../reference/manim.mobject.three_d.three_dimensions.ThreeDVMobject.html"
+    },
+    {
+      "text": "Torus",
+      "href": "../reference/manim.mobject.three_d.three_dimensions.Torus.html"
+    },
+    {
+      "text": "types",
+      "href": "../reference/manim.mobject.types.html"
+    },
+    {
+      "text": "image_mobject",
+      "href": "../reference/manim.mobject.types.image_mobject.html"
+    },
+    {
+      "text": "AbstractImageMobject",
+      "href": "../reference/manim.mobject.types.image_mobject.AbstractImageMobject.html"
+    },
+    {
+      "text": "ImageMobject",
+      "href": "../reference/manim.mobject.types.image_mobject.ImageMobject.html"
+    },
+    {
+      "text": "ImageMobjectFromCamera",
+      "href": "../reference/manim.mobject.types.image_mobject.ImageMobjectFromCamera.html"
+    },
+    {
+      "text": "point_cloud_mobject",
+      "href": "../reference/manim.mobject.types.point_cloud_mobject.html"
+    },
+    {
+      "text": "Mobject1D",
+      "href": "../reference/manim.mobject.types.point_cloud_mobject.Mobject1D.html"
+    },
+    {
+      "text": "Mobject2D",
+      "href": "../reference/manim.mobject.types.point_cloud_mobject.Mobject2D.html"
+    },
+    {
+      "text": "PGroup",
+      "href": "../reference/manim.mobject.types.point_cloud_mobject.PGroup.html"
+    },
+    {
+      "text": "PMobject",
+      "href": "../reference/manim.mobject.types.point_cloud_mobject.PMobject.html"
+    },
+    {
+      "text": "Point",
+      "href": "../reference/manim.mobject.types.point_cloud_mobject.Point.html"
+    },
+    {
+      "text": "PointCloudDot",
+      "href": "../reference/manim.mobject.types.point_cloud_mobject.PointCloudDot.html"
+    },
+    {
+      "text": "vectorized_mobject",
+      "href": "../reference/manim.mobject.types.vectorized_mobject.html"
+    },
+    {
+      "text": "CurvesAsSubmobjects",
+      "href": "../reference/manim.mobject.types.vectorized_mobject.CurvesAsSubmobjects.html"
+    },
+    {
+      "text": "DashedVMobject",
+      "href": "../reference/manim.mobject.types.vectorized_mobject.DashedVMobject.html"
+    },
+    {
+      "text": "VDict",
+      "href": "../reference/manim.mobject.types.vectorized_mobject.VDict.html"
+    },
+    {
+      "text": "VGroup",
+      "href": "../reference/manim.mobject.types.vectorized_mobject.VGroup.html"
+    },
+    {
+      "text": "VMobject",
+      "href": "../reference/manim.mobject.types.vectorized_mobject.VMobject.html"
+    },
+    {
+      "text": "VectorizedPoint",
+      "href": "../reference/manim.mobject.types.vectorized_mobject.VectorizedPoint.html"
+    },
+    {
+      "text": "utils",
+      "href": "../reference/manim.mobject.utils.html"
+    },
+    {
+      "text": "value_tracker",
+      "href": "../reference/manim.mobject.value_tracker.html"
+    },
+    {
+      "text": "ComplexValueTracker",
+      "href": "../reference/manim.mobject.value_tracker.ComplexValueTracker.html"
+    },
+    {
+      "text": "ValueTracker",
+      "href": "../reference/manim.mobject.value_tracker.ValueTracker.html"
+    },
+    {
+      "text": "vector_field",
+      "href": "../reference/manim.mobject.vector_field.html"
+    },
+    {
+      "text": "ArrowVectorField",
+      "href": "../reference/manim.mobject.vector_field.ArrowVectorField.html"
+    },
+    {
+      "text": "StreamLines",
+      "href": "../reference/manim.mobject.vector_field.StreamLines.html"
+    },
+    {
+      "text": "VectorField",
+      "href": "../reference/manim.mobject.vector_field.VectorField.html"
+    },
+    {
+      "text": "Scenes",
+      "href": "../reference_index/scenes.html"
+    },
+    {
+      "text": "moving_camera_scene",
+      "href": "../reference/manim.scene.moving_camera_scene.html"
+    },
+    {
+      "text": "MovingCameraScene",
+      "href": "../reference/manim.scene.moving_camera_scene.MovingCameraScene.html"
+    },
+    {
+      "text": "section",
+      "href": "../reference/manim.scene.section.html"
+    },
+    {
+      "text": "DefaultSectionType",
+      "href": "../reference/manim.scene.section.DefaultSectionType.html"
+    },
+    {
+      "text": "Section",
+      "href": "../reference/manim.scene.section.Section.html"
+    },
+    {
+      "text": "scene",
+      "href": "../reference/manim.scene.scene.html"
+    },
+    {
+      "text": "RerunSceneHandler",
+      "href": "../reference/manim.scene.scene.RerunSceneHandler.html"
+    },
+    {
+      "text": "Scene",
+      "href": "../reference/manim.scene.scene.Scene.html"
+    },
+    {
+      "text": "SceneInteractContinue",
+      "href": "../reference/manim.scene.scene.SceneInteractContinue.html"
+    },
+    {
+      "text": "SceneInteractRerun",
+      "href": "../reference/manim.scene.scene.SceneInteractRerun.html"
+    },
+    {
+      "text": "scene_file_writer",
+      "href": "../reference/manim.scene.scene_file_writer.html"
+    },
+    {
+      "text": "SceneFileWriter",
+      "href": "../reference/manim.scene.scene_file_writer.SceneFileWriter.html"
+    },
+    {
+      "text": "three_d_scene",
+      "href": "../reference/manim.scene.three_d_scene.html"
+    },
+    {
+      "text": "SpecialThreeDScene",
+      "href": "../reference/manim.scene.three_d_scene.SpecialThreeDScene.html"
+    },
+    {
+      "text": "ThreeDScene",
+      "href": "../reference/manim.scene.three_d_scene.ThreeDScene.html"
+    },
+    {
+      "text": "vector_space_scene",
+      "href": "../reference/manim.scene.vector_space_scene.html"
+    },
+    {
+      "text": "LinearTransformationScene",
+      "href": "../reference/manim.scene.vector_space_scene.LinearTransformationScene.html"
+    },
+    {
+      "text": "VectorScene",
+      "href": "../reference/manim.scene.vector_space_scene.VectorScene.html"
+    },
+    {
+      "text": "zoomed_scene",
+      "href": "../reference/manim.scene.zoomed_scene.html"
+    },
+    {
+      "text": "ZoomedScene",
+      "href": "../reference/manim.scene.zoomed_scene.ZoomedScene.html"
+    },
+    {
+      "text": "Utilities and other modules",
+      "href": "../reference_index/utilities_misc.html"
+    },
+    {
+      "text": "bezier",
+      "href": "../reference/manim.utils.bezier.html"
+    },
+    {
+      "text": "cli",
+      "href": "../reference/manim.cli.html"
+    },
+    {
+      "text": "cfg",
+      "href": "../reference/manim.cli.cfg.html"
+    },
+    {
+      "text": "checkhealth",
+      "href": "../reference/manim.cli.checkhealth.html"
+    },
+    {
+      "text": "init",
+      "href": "../reference/manim.cli.init.html"
+    },
+    {
+      "text": "plugins",
+      "href": "../reference/manim.cli.plugins.html"
+    },
+    {
+      "text": "render",
+      "href": "../reference/manim.cli.render.html"
+    },
+    {
+      "text": "color",
+      "href": "../reference/manim.utils.color.html"
+    },
+    {
+      "text": "core",
+      "href": "../reference/manim.utils.color.core.html"
+    },
+    {
+      "text": "HSV",
+      "href": "../reference/manim.utils.color.core.HSV.html"
+    },
+    {
+      "text": "ManimColor",
+      "href": "../reference/manim.utils.color.core.ManimColor.html"
+    },
+    {
+      "text": "RGBA",
+      "href": "../reference/manim.utils.color.core.RGBA.html"
+    },
+    {
+      "text": "RandomColorGenerator",
+      "href": "../reference/manim.utils.color.core.RandomColorGenerator.html"
+    },
+    {
+      "text": "manim_colors",
+      "href": "../reference/manim.utils.color.manim_colors.html"
+    },
+    {
+      "text": "AS2700",
+      "href": "../reference/manim.utils.color.AS2700.html"
+    },
+    {
+      "text": "BS381",
+      "href": "../reference/manim.utils.color.BS381.html"
+    },
+    {
+      "text": "DVIPSNAMES",
+      "href": "../reference/manim.utils.color.DVIPSNAMES.html"
+    },
+    {
+      "text": "SVGNAMES",
+      "href": "../reference/manim.utils.color.SVGNAMES.html"
+    },
+    {
+      "text": "XKCD",
+      "href": "../reference/manim.utils.color.XKCD.html"
+    },
+    {
+      "text": "X11",
+      "href": "../reference/manim.utils.color.X11.html"
+    },
+    {
+      "text": "commands",
+      "href": "../reference/manim.utils.commands.html"
+    },
+    {
+      "text": "VideoMetadata",
+      "href": "../reference/manim.utils.commands.VideoMetadata.html"
+    },
+    {
+      "text": "config_ops",
+      "href": "../reference/manim.utils.config_ops.html"
+    },
+    {
+      "text": "DictAsObject",
+      "href": "../reference/manim.utils.config_ops.DictAsObject.html"
+    },
+    {
+      "text": "constants",
+      "href": "../reference/manim.constants.html"
+    },
+    {
+      "text": "CapStyleType",
+      "href": "../reference/manim.constants.CapStyleType.html"
+    },
+    {
+      "text": "LineJointType",
+      "href": "../reference/manim.constants.LineJointType.html"
+    },
+    {
+      "text": "QualityDict",
+      "href": "../reference/manim.constants.QualityDict.html"
+    },
+    {
+      "text": "RendererType",
+      "href": "../reference/manim.constants.RendererType.html"
+    },
+    {
+      "text": "data_structures",
+      "href": "../reference/manim.data_structures.html"
+    },
+    {
+      "text": "MethodWithArgs",
+      "href": "../reference/manim.data_structures.MethodWithArgs.html"
+    },
+    {
+      "text": "debug",
+      "href": "../reference/manim.utils.debug.html"
+    },
+    {
+      "text": "deprecation",
+      "href": "../reference/manim.utils.deprecation.html"
+    },
+    {
+      "text": "docbuild",
+      "href": "../reference/manim.utils.docbuild.html"
+    },
+    {
+      "text": "autoaliasattr_directive",
+      "href": "../reference/manim.utils.docbuild.autoaliasattr_directive.html"
+    },
+    {
+      "text": "AliasAttrDocumenter",
+      "href": "../reference/manim.utils.docbuild.autoaliasattr_directive.AliasAttrDocumenter.html"
+    },
+    {
+      "text": "autocolor_directive",
+      "href": "../reference/manim.utils.docbuild.autocolor_directive.html"
+    },
+    {
+      "text": "ManimColorModuleDocumenter",
+      "href": "../reference/manim.utils.docbuild.autocolor_directive.ManimColorModuleDocumenter.html"
+    },
+    {
+      "text": "manim_directive",
+      "href": "../reference/manim.utils.docbuild.manim_directive.html"
+    },
+    {
+      "text": "ManimDirective",
+      "href": "../reference/manim.utils.docbuild.manim_directive.ManimDirective.html"
+    },
+    {
+      "text": "SetupMetadata",
+      "href": "../reference/manim.utils.docbuild.manim_directive.SetupMetadata.html"
+    },
+    {
+      "text": "SkipManimNode",
+      "href": "../reference/manim.utils.docbuild.manim_directive.SkipManimNode.html"
+    },
+    {
+      "text": "module_parsing",
+      "href": "../reference/manim.utils.docbuild.module_parsing.html"
+    },
+    {
+      "text": "hashing",
+      "href": "../reference/manim.utils.hashing.html"
+    },
+    {
+      "text": "images",
+      "href": "../reference/manim.utils.images.html"
+    },
+    {
+      "text": "ipython_magic",
+      "href": "../reference/manim.utils.ipython_magic.html"
+    },
+    {
+      "text": "ManimMagic",
+      "href": "../reference/manim.utils.ipython_magic.ManimMagic.html"
+    },
+    {
+      "text": "iterables",
+      "href": "../reference/manim.utils.iterables.html"
+    },
+    {
+      "text": "paths",
+      "href": "../reference/manim.utils.paths.html"
+    },
+    {
+      "text": "rate_functions",
+      "href": "../reference/manim.utils.rate_functions.html"
+    },
+    {
+      "text": "RateFunction",
+      "href": "../reference/manim.utils.rate_functions.RateFunction.html"
+    },
+    {
+      "text": "simple_functions",
+      "href": "../reference/manim.utils.simple_functions.html"
+    },
+    {
+      "text": "Comparable",
+      "href": "../reference/manim.utils.simple_functions.Comparable.html"
+    },
+    {
+      "text": "sounds",
+      "href": "../reference/manim.utils.sounds.html"
+    },
+    {
+      "text": "space_ops",
+      "href": "../reference/manim.utils.space_ops.html"
+    },
+    {
+      "text": "testing",
+      "href": "../reference/manim.utils.testing.html"
+    },
+    {
+      "text": "_frames_testers",
+      "href": "../reference/manim.utils.testing._frames_testers.html"
+    },
+    {
+      "text": "_show_diff",
+      "href": "../reference/manim.utils.testing._show_diff.html"
+    },
+    {
+      "text": "_test_class_makers",
+      "href": "../reference/manim.utils.testing._test_class_makers.html"
+    },
+    {
+      "text": "DummySceneFileWriter",
+      "href": "../reference/manim.utils.testing._test_class_makers.DummySceneFileWriter.html"
+    },
+    {
+      "text": "tex",
+      "href": "../reference/manim.utils.tex.html"
+    },
+    {
+      "text": "TexTemplate",
+      "href": "../reference/manim.utils.tex.TexTemplate.html"
+    },
+    {
+      "text": "tex_file_writing",
+      "href": "../reference/manim.utils.tex_file_writing.html"
+    },
+    {
+      "text": "tex_templates",
+      "href": "../reference/manim.utils.tex_templates.html"
+    },
+    {
+      "text": "TexFontTemplates",
+      "href": "../reference/manim.utils.tex_templates.TexFontTemplates.html"
+    },
+    {
+      "text": "TexTemplateLibrary",
+      "href": "../reference/manim.utils.tex_templates.TexTemplateLibrary.html"
+    },
+    {
+      "text": "typing",
+      "href": "../reference/manim.typing.html"
+    },
+    {
+      "text": "Plugins",
+      "href": "../plugins.html"
+    },
+    {
+      "text": "Changelog",
+      "href": "../changelog.html"
+    },
+    {
+      "text": "v0.20.1",
+      "href": "../changelog/0.20.1-changelog.html"
+    },
+    {
+      "text": "v0.20.0",
+      "href": "../changelog/0.20.0-changelog.html"
+    },
+    {
+      "text": "v0.19.2",
+      "href": "../changelog/0.19.2-changelog.html"
+    },
+    {
+      "text": "v0.19.1",
+      "href": "../changelog/0.19.1-changelog.html"
+    },
+    {
+      "text": "v0.19.0",
+      "href": "../changelog/0.19.0-changelog.html"
+    },
+    {
+      "text": "v0.18.1",
+      "href": "../changelog/0.18.1-changelog.html"
+    },
+    {
+      "text": "v0.18.0.post0",
+      "href": "../changelog/0.18.0.post0-changelog.html"
+    },
+    {
+      "text": "v0.18.0",
+      "href": "../changelog/0.18.0-changelog.html"
+    },
+    {
+      "text": "v0.17.3",
+      "href": "../changelog/0.17.3-changelog.html"
+    },
+    {
+      "text": "v0.17.2",
+      "href": "../changelog/0.17.2-changelog.html"
+    },
+    {
+      "text": "v0.17.1",
+      "href": "../changelog/0.17.1-changelog.html"
+    },
+    {
+      "text": "v0.17.0",
+      "href": "../changelog/0.17.0-changelog.html"
+    },
+    {
+      "text": "v0.16.0",
+      "href": "../changelog/0.16.0-changelog.html"
+    },
+    {
+      "text": "v0.15.2",
+      "href": "../changelog/0.15.2-changelog.html"
+    },
+    {
+      "text": "v0.15.1",
+      "href": "../changelog/0.15.1-changelog.html"
+    },
+    {
+      "text": "v0.15.0",
+      "href": "../changelog/0.15.0-changelog.html"
+    },
+    {
+      "text": "v0.14.0",
+      "href": "../changelog/0.14.0-changelog.html"
+    },
+    {
+      "text": "v0.13.1",
+      "href": "../changelog/0.13.1-changelog.html"
+    },
+    {
+      "text": "v0.13.0",
+      "href": "../changelog/0.13.0-changelog.html"
+    },
+    {
+      "text": "v0.12.0",
+      "href": "../changelog/0.12.0-changelog.html"
+    },
+    {
+      "text": "v0.11.0",
+      "href": "../changelog/0.11.0-changelog.html"
+    },
+    {
+      "text": "v0.10.0",
+      "href": "../changelog/0.10.0-changelog.html"
+    },
+    {
+      "text": "v0.9.0",
+      "href": "../changelog/0.9.0-changelog.html"
+    },
+    {
+      "text": "v0.8.0",
+      "href": "../changelog/0.8.0-changelog.html"
+    },
+    {
+      "text": "v0.7.0",
+      "href": "../changelog/0.7.0-changelog.html"
+    },
+    {
+      "text": "v0.6.0",
+      "href": "../changelog/0.6.0-changelog.html"
+    },
+    {
+      "text": "v0.5.0",
+      "href": "../changelog/0.5.0-changelog.html"
+    },
+    {
+      "text": "v0.4.0",
+      "href": "../changelog/0.4.0-changelog.html"
+    },
+    {
+      "text": "v0.3.0",
+      "href": "../changelog/0.3.0-changelog.html"
+    },
+    {
+      "text": "v0.2.0",
+      "href": "../changelog/0.2.0-changelog.html"
+    },
+    {
+      "text": "v0.1.1",
+      "href": "../changelog/0.1.1-changelog.html"
+    },
+    {
+      "text": "v0.1.0",
+      "href": "../changelog/0.1.0-changelog.html"
+    },
+    {
+      "text": "Contributing",
+      "href": "../contributing.html"
+    },
+    {
+      "text": "Manim Development Process",
+      "href": "../contributing/development.html"
+    },
+    {
+      "text": "Adding Documentation",
+      "href": "../contributing/docs.html"
+    },
+    {
+      "text": "Adding Admonitions",
+      "href": "../contributing/docs/admonitions.html"
+    },
+    {
+      "text": "Adding Docstrings",
+      "href": "../contributing/docs/docstrings.html"
+    },
+    {
+      "text": "Adding Examples",
+      "href": "../contributing/docs/examples.html"
+    },
+    {
+      "text": "Adding References",
+      "href": "../contributing/docs/references.html"
+    },
+    {
+      "text": "Typing Conventions",
+      "href": "../contributing/docs/typings.html"
+    },
+    {
+      "text": "Choosing Type Hints",
+      "href": "../contributing/docs/types.html"
+    },
+    {
+      "text": "Adding Tests",
+      "href": "../contributing/testing.html"
+    },
+    {
+      "text": "Improving performance",
+      "href": "../contributing/performance.html"
+    },
+    {
+      "text": "Internationalization",
+      "href": "../contributing/internationalization.html"
+    },
+    {
+      "text": "Code of Conduct",
+      "href": "../conduct.html"
+    },
+    {
+      "text": "Back to top",
+      "href": "#"
+    },
+    {
+      "text": "View this page",
+      "href": "https://github.com/ManimCommunity/manim/blob/main/docs/source/tutorials/quickstart.rst?plain=true"
+    },
+    {
+      "text": "Edit this page",
+      "href": "https://github.com/ManimCommunity/manim/edit/main/docs/source/tutorials/quickstart.rst"
+    },
+    {
+      "text": "¶",
+      "href": "#quickstart"
+    },
+    {
+      "text": "Installation",
+      "href": "../installation.html"
+    },
+    {
+      "text": "IPythonmagiccommand",
+      "href": "../reference/manim.utils.ipython_magic.ManimMagic.html#manim.utils.ipython_magic.ManimMagic.manim"
+    },
+    {
+      "text": "¶",
+      "href": "#overview"
+    },
+    {
+      "text": "¶",
+      "href": "#starting-a-new-project"
+    },
+    {
+      "text": "¶",
+      "href": "#animating-a-circle"
+    },
+    {
+      "text": "FAQ section",
+      "href": "../faq/index.html"
+    },
+    {
+      "text": "¶",
+      "href": "#explanation"
+    },
+    {
+      "text": "construct()",
+      "href": "../reference/manim.scene.scene.Scene.html#manim.scene.scene.Scene.construct"
+    },
+    {
+      "text": "Scene",
+      "href": "../reference/manim.scene.scene.Scene.html#manim.scene.scene.Scene"
+    },
+    {
+      "text": "construct()",
+      "href": "../reference/manim.scene.scene.Scene.html#manim.scene.scene.Scene.construct"
+    },
+    {
+      "text": "Create",
+      "href": "../reference/manim.animation.creation.Create.html#manim.animation.creation.Create"
+    },
+    {
+      "text": "construct()",
+      "href": "../reference/manim.scene.scene.Scene.html#manim.scene.scene.Scene.construct"
+    },
+    {
+      "text": "Scene",
+      "href": "../reference/manim.scene.scene.Scene.html#manim.scene.scene.Scene"
+    },
+    {
+      "text": "¶",
+      "href": "#transforming-a-square-into-a-circle"
+    },
+    {
+      "text": "¶",
+      "href": "#positioning-mobjects"
+    },
+    {
+      "text": "Mobject",
+      "href": "../reference/manim.mobject.mobject.Mobject.html#manim.mobject.mobject.Mobject"
+    },
+    {
+      "text": "¶",
+      "href": "#using-animate-syntax-to-animate-methods"
+    },
+    {
+      "text": "¶",
+      "href": "#transform-vs-replacementtransform"
+    },
+    {
+      "text": "¶",
+      "href": "#transformcycle"
+    },
+    {
+      "text": "¶",
+      "href": "#you-re-done"
+    },
+    {
+      "text": "Manim’s Output Settings",
+      "href": "output_and_config.html"
+    },
+    {
+      "text": "Tutorials",
+      "href": "index.html"
+    },
+    {
+      "text": "Reference Manual",
+      "href": "../reference.html"
+    },
+    {
+      "text": "NextManim’s Output Settings",
+      "href": "output_and_config.html"
+    },
+    {
+      "text": "PreviousTutorials",
+      "href": "index.html"
+    },
+    {
+      "text": "Sphinx",
+      "href": "https://www.sphinx-doc.org/"
+    },
+    {
+      "text": "@pradyunsg",
+      "href": "https://pradyunsg.me"
+    },
+    {
+      "text": "Furo",
+      "href": "https://github.com/pradyunsg/furo"
+    },
+    {
+      "text": "Quickstart",
+      "href": "#"
+    },
+    {
+      "text": "Overview",
+      "href": "#overview"
+    },
+    {
+      "text": "Starting a new project",
+      "href": "#starting-a-new-project"
+    },
+    {
+      "text": "Animating a circle",
+      "href": "#animating-a-circle"
+    },
+    {
+      "text": "Explanation",
+      "href": "#explanation"
+    },
+    {
+      "text": "Transforming a square into a circle",
+      "href": "#transforming-a-square-into-a-circle"
+    },
+    {
+      "text": "PositioningMobjects",
+      "href": "#positioning-mobjects"
+    },
+    {
+      "text": "Using.animatesyntax to animate methods",
+      "href": "#using-animate-syntax-to-animate-methods"
+    },
+    {
+      "text": "TransformvsReplacementTransform",
+      "href": "#transform-vs-replacementtransform"
+    },
+    {
+      "text": "You’re done!",
+      "href": "#you-re-done"
+    }
+  ],
+  "images": [
+    {
+      "src": "../_static/manim-logo-sidebar.svg",
+      "alt": "Light Logo"
+    },
+    {
+      "src": "../_static/manim-logo-sidebar-dark.svg",
+      "alt": "Dark Logo"
+    }
+  ],
+  "code_blocks": [
+    "manim init project my-project --default\n",
+    "from manim import *\n\n\nclass CreateCircle(Scene):\n    def construct(self):\n        circle = Circle()  # create a circle\n        circle.set_fill(PINK, opacity=0.5)  # set the color and transparency\n        self.play(Create(circle))  # show the circle on screen\n",
+    "manim -pql main.py CreateCircle\n",
+    "from manim import *\n",
+    "class CreateCircle(Scene):\n    def construct(self):\n        [...]\n",
+    "circle = Circle()  # create a circle\ncircle.set_fill(PINK, opacity=0.5)  # set the color and transparency\n",
+    "self.play(Create(circle))  # show the circle on screen\n",
+    "class SquareToCircle(Scene):\n    def construct(self):\n        circle = Circle()  # create a circle\n        circle.set_fill(PINK, opacity=0.5)  # set color and transparency\n\n        square = Square()  # create a square\n        square.rotate(PI / 4)  # rotate a certain amount\n\n        self.play(Create(square))  # animate the creation of the square\n        self.play(Transform(square, circle))  # interpolate the square into the circle\n        self.play(FadeOut(square))  # fade out animation\n",
+    "manim -pql scene.py SquareToCircle\n",
+    "class SquareAndCircle(Scene):\n    def construct(self):\n        circle = Circle()  # create a circle\n        circle.set_fill(PINK, opacity=0.5)  # set the color and transparency\n\n        square = Square()  # create a square\n        square.set_fill(BLUE, opacity=0.5)  # set the color and transparency\n\n        square.next_to(circle, RIGHT, buff=0.5)  # set the position\n        self.play(Create(circle), Create(square))  # show the shapes on screen\n",
+    "manim -pql scene.py SquareAndCircle\n",
+    "class AnimatedSquareToCircle(Scene):\n    def construct(self):\n        circle = Circle()  # create a circle\n        square = Square()  # create a square\n\n        self.play(Create(square))  # show the square on screen\n        self.play(square.animate.rotate(PI / 4))  # rotate the square\n        self.play(Transform(square, circle))  # transform the square into a circle\n        self.play(\n            square.animate.set_fill(PINK, opacity=0.5)\n        )  # color the circle on screen\n",
+    "manim -pql scene.py AnimatedSquareToCircle\n",
+    "class DifferentRotations(Scene):\n    def construct(self):\n        left_square = Square(color=BLUE, fill_opacity=0.7).shift(2 * LEFT)\n        right_square = Square(color=GREEN, fill_opacity=0.7).shift(2 * RIGHT)\n        self.play(\n            left_square.animate.rotate(PI), Rotate(right_square, angle=PI), run_time=2\n        )\n        self.wait()\n",
+    "manim -pql scene.py DifferentRotations\n",
+    "class TwoTransforms(Scene):\n    def transform(self):\n        a = Circle()\n        b = Square()\n        c = Triangle()\n        self.play(Transform(a, b))\n        self.play(Transform(a, c))\n        self.play(FadeOut(a))\n\n    def replacement_transform(self):\n        a = Circle()\n        b = Square()\n        c = Triangle()\n        self.play(ReplacementTransform(a, b))\n        self.play(ReplacementTransform(b, c))\n        self.play(FadeOut(c))\n\n    def construct(self):\n        self.transform()\n        self.wait(0.5)  # wait for 0.5 seconds\n        self.replacement_transform()\n",
+    "from manim import *\n\nclass TransformCycle(Scene):\n    def construct(self):\n        a = Circle()\n        t1 = Square()\n        t2 = Triangle()\n        self.add(a)\n        self.wait()\n        for t in [t1,t2]:\n            self.play(Transform(a,t))\n",
+    "\nclass TransformCycle(Scene):\n    def construct(self):\n        a = Circle()\n        t1 = Square()\n        t2 = Triangle()\n        self.add(a)\n        self.wait()\n        for t in [t1,t2]:\n            self.play(Transform(a,t))\n\n"
+  ],
+  "element_counts": {
+    "span": 825,
+    "a": 507,
+    "li": 482,
+    "svg": 126,
+    "use": 115,
+    "input": 105,
+    "label": 105,
+    "ul": 105,
+    "code": 101,
+    "div": 72,
+    "p": 53,
+    "line": 27,
+    "pre": 18,
+    "path": 15,
+    "meta": 14,
+    "link": 14,
+    "script": 12,
+    "section": 10,
+    "symbol": 9,
+    "ol": 9,
+    "title": 8,
+    "h2": 7,
+    "video": 6,
+    "circle": 3,
+    "button": 2,
+    "aside": 2,
+    "img": 2,
+    "h3": 2,
+    "html": 1,
+    "head": 1,
+    "style": 1,
+    "body": 1,
+    "polyline": 1,
+    "header": 1,
+    "form": 1,
+    "article": 1,
+    "h1": 1,
+    "footer": 1
+  }
+}

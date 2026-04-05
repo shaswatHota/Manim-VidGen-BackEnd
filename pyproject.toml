@@ -13,4 +13,6 @@ dependencies = [
     "groq",
     "python-dotenv",
     "langchain[google-genai]>=1.2.13",
+    "beautifulsoup4>=4.14.3",
+    "langchain-community>=0.4.1",
 ]

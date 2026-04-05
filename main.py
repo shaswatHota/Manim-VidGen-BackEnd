@@ -10,6 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 # from google.generativeai.types import GenerationConfig
 from langchain.chat_models import init_chat_model
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
+from langchain_community.document_loaders import TextLoader
 
 
 app = FastAPI()
@@ -85,6 +86,7 @@ def call_llm(prompt: str) -> str:
     except Exception as e:
         print(f"Error calling LLM: {e}")
         return f"error: {str(e)}"
+
 
 
 @app.post("/generate")
