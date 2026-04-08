@@ -86,7 +86,6 @@ def call_llm(prompt: str) -> str:
         print(f"Error calling LLM: {e}")
         return f"error: {str(e)}"
 
-
 @app.post("/generate")
 async def generate(request: Request):
     try:
