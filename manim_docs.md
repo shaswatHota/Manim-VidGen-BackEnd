@@ -50,10 +50,17 @@ as well as any output that your project produces.
 
 ## Animating a circle
 
-- Open a text editor, such as Notepad. Open the filemain.pyin themy-projectfolder.
-It should look something like this: frommanimimport*classCreateCircle(Scene):defconstruct(self):circle=Circle()# create a circlecircle.set_fill(PINK,opacity=0.5)# set the color and transparencyself.play(Create(circle))# show the circle on screen
+- Open a text editor, such as Notepad. Open the file main.py in the my-projectfolder.
+It should look something like this:
+from manim import*classCreateCircle(Scene):
+    def construct(self):
+        circle=Circle() 
+        # create a circle
+        circle.set_fill(PINK,opacity=0.5)
+        # set the color and transparency
+        self.play(Create(circle)) # show the circle on screen
 - Open the command line, navigate to your project folder, and execute
-the following command: manim-pqlmain.pyCreateCircle
+the following command: manim -pql main.py CreateCircle
 Manim will output rendering information, then create an MP4 file.
 Your default movie player will play the MP4 file, displaying the following animation.
 
