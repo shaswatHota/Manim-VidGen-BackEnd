@@ -16,3 +16,6 @@ media/
 .env
 
 video.py
+
+# Local FAISS index + embedding cache manifest
+vectorstore_faiss/
