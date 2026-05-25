@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+import voyageai
 from pathlib import Path
 from typing import TYPE_CHECKING, Optional
 
@@ -47,6 +48,7 @@ def _write_manifest(md_path: Path) -> None:
 
 def _embeddings() -> GoogleGenerativeAIEmbeddings:
     key = os.environ.get("GEMINI_API_KEY")
+
     if not key:
         raise ValueError("GEMINI_API_KEY required for embeddings")
     return GoogleGenerativeAIEmbeddings(
@@ -65,6 +67,7 @@ def build_or_load_retriever(
         raise FileNotFoundError(f"Manim docs not found: {md}")
 
     emb = _embeddings()
+    print("Embeddings initialized")
 
     index_faiss = VECTOR_DIR / "index.faiss"
     if index_faiss.is_file() and _manifest_matches(md):
@@ -75,6 +78,7 @@ def build_or_load_retriever(
         )
     else:
         chunks = loadnSplitDoc(str(md))
+        print("chunks loaded , length of the doc is ",len(chunks))
         if not chunks:
             raise ValueError("No document chunks produced from manim_docs")
         vs = FAISS.from_documents(chunks, emb)
@@ -105,4 +109,6 @@ def retrieve_context(query: str) -> str:
         return ""
     docs = _manim_retriever.invoke(query)
     parts = [d.page_content for d in docs if getattr(d, "page_content", None)]
+    print("\n------------------------------------------\n",parts)
+    
     return "\n\n---\n\n".join(parts)

@@ -8,7 +8,6 @@ dependencies = [
     "manim>=0.19.0",
     "fastapi",
     "uvicorn[standard]",
-    "google-generativeai",
     "google-api-python-client",
     "groq",
     "python-dotenv",
@@ -17,4 +16,8 @@ dependencies = [
     "langchain-community>=0.4.1",
     "langchain-text-splitters>=0.3.0",
     "faiss-cpu>=1.8.0",
+    "google-genai>=1.68.0",
+    "langchain-google-genai>=4.2.2",
+    "voyageai>=0.3.7",
+    "langchain-core>=1.4.0",
 ]

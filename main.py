@@ -136,6 +136,7 @@ def run_stage_a_scene_plan(user_prompt: str, rag_context: str = "") -> ScenePlan
     plan = planner.invoke(messages)
     if not isinstance(plan, ScenePlanDocument):
         raise TypeError("Structured scene planner returned an unexpected type")
+    print("\n------------------------------\n",plan)
     return plan
 
 
@@ -159,6 +160,7 @@ def run_stage_b_manim_code(
     ]
     response = gemini_model.invoke(messages)
     text = response.content if isinstance(response.content, str) else str(response.content)
+    print("\n--------------------------------------------\n",text)
     return extract_python_code(text)
 
 
