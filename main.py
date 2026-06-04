@@ -12,6 +12,7 @@ from fastapi.responses import FileResponse
 from langchain.chat_models import init_chat_model
 from langchain_core.messages import HumanMessage, SystemMessage
 from pydantic import BaseModel, Field
+from typing import Literal
 from langchain_anthropic import ChatAnthropic
 from rag_retriever import init_manim_rag, retrieve_context
 
@@ -57,6 +58,9 @@ class PlannedScene(BaseModel):
     scene: int = Field(description="1-based scene index in story order")
     description: str = Field(description="What the viewer sees in this scene")
     animation: str = Field(description="Primary motion / animation for this scene")
+    base_class: Literal['Scene','MovingCameraScene','ThreeDScene'] = Field(
+         description="Manim base class required for this animation"
+    )
     transitions: Optional[str] = Field(
         default=None,
         description="How this scene enters/exits or connects to the next",
@@ -96,7 +100,7 @@ When Manim CE documentation excerpts are included, use them only to align scene 
 Output must conform exactly to the structured schema you are given (fields only, no code)."""
 
 
-STAGE_B_SYSTEM = """You are an expert Manim Community Edition (CE) developer.
+STAGE_C_SYSTEM = """You are an expert Manim Community Edition (CE) developer.
 
 You always receive a structured scene plan as JSON (title + scenes). Your job is to implement the FULL plan in a single Manim script.
 
@@ -132,7 +136,7 @@ def _with_rag_block(user_text: str, rag_context: str) -> str:
 
 
 def run_stage_a_scene_plan(user_prompt: str, rag_context: str = "") -> ScenePlanDocument:
-    planner = model.with_structured_output(ChatAnthropic)
+    planner = model.with_structured_output(ScenePlanDocument)
     body = _with_rag_block(user_prompt, rag_context)
     messages = [
         SystemMessage(content=STAGE_A_SYSTEM),
@@ -145,7 +149,7 @@ def run_stage_a_scene_plan(user_prompt: str, rag_context: str = "") -> ScenePlan
     return plan
 
 
-def run_stage_b_manim_code(
+def run_stage_c_manim_code(
     plan: ScenePlanDocument,
     user_prompt: str,
     rag_context: str = "",
@@ -160,10 +164,10 @@ def run_stage_b_manim_code(
     )
     body = _with_rag_block(plan_block, rag_context)
     messages = [
-        SystemMessage(content=STAGE_B_SYSTEM),
+        SystemMessage(content=STAGE_C_SYSTEM),
         HumanMessage(content=body),
     ]
-    response = model.invoke(ChatAnthropic)
+    response = model.invoke(messages)
     text = response.content if isinstance(response.content, str) else str(response.content)
     print("\n--------------------------------------------\n",text)
     return extract_python_code(text)
@@ -191,14 +195,14 @@ async def generate(request: Request):
         plan_dict = scene_plan.model_dump()
         print("scene plan:", json.dumps(plan_dict, indent=2))
 
-        rag_query_b = f"{prompt}\n\nScene plan:\n{scene_plan.model_dump_json(indent=2)}"
-        rag_context_b = retrieve_context(rag_query_b)
+        rag_query_c = f"{prompt}\n\nScene plan:\n{scene_plan.model_dump_json(indent=2)}"
+        rag_context_c = retrieve_context(rag_query_c)
 
         try:
-            llm_output = run_stage_b_manim_code(
+            llm_output = run_stage_c_manim_code(
                 scene_plan,
                 user_prompt=prompt,
-                rag_context=rag_context_b,
+                rag_context=rag_context_c,
             )
         except Exception as e:
             print(f"Stage B error: {e}")
