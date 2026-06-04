@@ -12,17 +12,22 @@ from fastapi.responses import FileResponse
 from langchain.chat_models import init_chat_model
 from langchain_core.messages import HumanMessage, SystemMessage
 from pydantic import BaseModel, Field
-
+from langchain_anthropic import ChatAnthropic
 from rag_retriever import init_manim_rag, retrieve_context
 
 config = dotenv_values(".env")
-GEMINI_API_KEY = config.get("GEMINI_API_KEY")
-if not GEMINI_API_KEY:
-    raise ValueError("GEMINI_API_KEY not found in .env file.")
-os.environ["GEMINI_API_KEY"] = GEMINI_API_KEY
+# GEMINI_API_KEY = config.get("GEMINI_API_KEY")
+# if not GEMINI_API_KEY:
+#     raise ValueError("GEMINI_API_KEY not found in .env file.")
+# os.environ["GEMINI_API_KEY"] = GEMINI_API_KEY
 
-gemini_model = init_chat_model(
-    model="google_genai:gemini-2.5-flash",
+ANTHROPIC_API_KEY = config.get("ANTHROPIC_API_KEY")
+if not ANTHROPIC_API_KEY:
+    raise ValueError("ANTHROPIC_API_KEY not found in .env file.")
+os.environ["ANTHROPIC_API_KEY"] = ANTHROPIC_API_KEY
+
+model = ChatAnthropic(
+    model="claude-sonnet-4-6",
     temperature=0,
 )
 
@@ -127,7 +132,7 @@ def _with_rag_block(user_text: str, rag_context: str) -> str:
 
 
 def run_stage_a_scene_plan(user_prompt: str, rag_context: str = "") -> ScenePlanDocument:
-    planner = gemini_model.with_structured_output(ScenePlanDocument)
+    planner = model.with_structured_output(ChatAnthropic)
     body = _with_rag_block(user_prompt, rag_context)
     messages = [
         SystemMessage(content=STAGE_A_SYSTEM),
@@ -158,7 +163,7 @@ def run_stage_b_manim_code(
         SystemMessage(content=STAGE_B_SYSTEM),
         HumanMessage(content=body),
     ]
-    response = gemini_model.invoke(messages)
+    response = model.invoke(ChatAnthropic)
     text = response.content if isinstance(response.content, str) else str(response.content)
     print("\n--------------------------------------------\n",text)
     return extract_python_code(text)
