@@ -2,22 +2,21 @@
 
 ## 3 stage architecture :
 
-    I have 2 ideas of regarding the flow of prompt and enhancement of prompt
-    both require an intermediate stage before the code writing and after the scene planning stage 
-    It is a contractor stage which will enforce strict rules for the llm beforce code generation .It will improve accouracy decently.
+I have 2 ideas regarding the flow of prompt and enhancement of prompt both require an intermediate stage before the code writing and after the scene planning stage 
+It is a contractor stage which will enforce strict rules for the llm beforce code generation .It will improve accouracy decently.
 
-> **Architecture 1:** Extra LLM call as intermediate stage
-    The contractor stage will be an llm call which  will only write contract regarding the scenes . For each scenes the contract will be in JSON format which will specify which base_class Literal it is using . Basically it will have all the informations regarding how is each scene mapped with all the other scenes .
+**Architecture 1:** Extra LLM call as intermediate stage
+The contractor stage will be an llm call which  will only write contract regarding the scenes . For each scenes the contract will be in JSON format which will specify which base_class Literal it is using . Basically it will have all the informations regarding how is each scene mapped with all the other scenes .
     use cases : 
     1. Complex animation sequencing that requires API-level decisions (Transform vs ReplacementTransform vs TransformMatchingShapes)
     2. 3D scene detection (ThreeDScene vs MovingCameraScene)
     3. Performance hints like "this has 8+ objects, avoid animating all at once"
-> **Architecture 2:** Functional validation with keyword matching 
-    The contractor stage will be a function call , in this function we will maintain a keyword list . It will map with the scene plan and decide the structure and which base_class will be used and return the output in clean JSON format which will be passed to the next stage along with the stage a plan of the scene to generate the code .
+**Architecture 2:** Functional validation with keyword matching 
+The contractor stage will be a function call , in this function we will maintain a keyword list . It will map with the scene plan and decide the structure and which base_class will be used and return the output in clean JSON format which will be passed to the next stage along with the stage a plan of the scene to generate the code .
 
 
 ## AST TREE implementation
-    we will have a validation layer before running the generated code on our server .First we will generate the AST tree of the code and do a basic keyword match to check if it has wrote potential dangerous calls like 
+we will have a validation layer before running the generated code on our server .First we will generate the AST tree of the code and do a basic keyword match to check if it has wrote potential dangerous calls like 
 
     ```python
     FORBIDDEN_CALLS = {
@@ -71,4 +70,4 @@
     }
     ```
 ## Retry Logic
-    If a match is found in the AST validation or an error occur during execution of the program it will retry the program with the error message appended to the next prompt . There will be finite number of retries after which it will grace fully stop the retry with an error message or suggestion to avoid infinite retries .
+If a match is found in the AST validation or an error occur during execution of the program it will retry the program with the error message appended to the next prompt . There will be finite number of retries after which it will grace fully stop the retry with an error message or suggestion to avoid infinite retries .
