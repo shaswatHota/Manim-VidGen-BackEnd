@@ -18,7 +18,7 @@ The contractor stage will be a function call , in this function we will maintain
 ## AST TREE implementation
 we will have a validation layer before running the generated code on our server .First we will generate the AST tree of the code and do a basic keyword match to check if it has wrote potential dangerous calls like 
 
-    ```python
+```python
     FORBIDDEN_CALLS = {
     # code execution
     "eval", "exec", "compile",
@@ -68,6 +68,6 @@ we will have a validation layer before running the generated code on our server 
         "threading", "multiprocessing",
         "signal", "atexit",
     }
-    ```
+```
 ## Retry Logic
 If a match is found in the AST validation or an error occur during execution of the program it will retry the program with the error message appended to the next prompt . There will be finite number of retries after which it will grace fully stop the retry with an error message or suggestion to avoid infinite retries .
